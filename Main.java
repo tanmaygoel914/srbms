@@ -4,7 +4,6 @@ import services.*;
 import controller.MenuController;
 import utils.MockData; 
 public class Main {
-
     public static void main(String[] args) {
         UserRepository userRepo = new UserRepository();
         ResourceRepository resourceRepo = new ResourceRepository();
@@ -23,4 +22,3 @@ public class Main {
         menuController.start();
     }
 }
- 

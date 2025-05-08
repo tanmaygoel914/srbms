@@ -42,7 +42,7 @@ public class MenuController {
                     register();
                     break;
                 case 3:
-                    System.out.println("Thank you for using");
+                    System.out.println("Tata bye bye");
                     return;
                 default:
                     System.out.println("galat choice Please try again.");
@@ -86,7 +86,6 @@ public class MenuController {
         String email = scanner.nextLine();
         System.out.println("Enter Password:");
         String password = scanner.nextLine();
-
         currentUser = userService.login(email, password);
         if (currentUser == null) {
             System.out.println("Invalid email or password.");
@@ -136,7 +135,7 @@ public class MenuController {
 
     private void handleUserSession() {
         while (currentUser != null) {
-            System.out.println("\nhey: " + currentUser.getEmail());
+            System.out.println("\nLogined as: " + currentUser.getEmail());
             System.out.println();
 
             currentUser.displayMenu();
@@ -202,7 +201,7 @@ public class MenuController {
                 System.out.println("Choose Resource Type:");
                 System.out.println("1. Book");
                 System.out.println("2. Equipments");
-                System.out.println("3. Room");
+                System.out.println("3. GamingConsole");
                 int typeChoice = getValidIntInput("Select type ");
                 scanner.nextLine();
 
@@ -215,7 +214,7 @@ public class MenuController {
                         type = "Equipment";
                         break;
                     case 3:
-                        type = "Room";
+                        type = "GamingConsole";
                         break;
                     default:
                         type = "Other";
@@ -361,19 +360,26 @@ public class MenuController {
                 System.out.println("Invalid option. Please try again.");
         }
     }
-
     private void displayResourceList(List<Resource> resources) {
         if (resources.isEmpty()) {
             System.out.println("No resources available.");
         } else {
-            System.out.println("ID | Name | Type | Cost/Hour | Available/Total");
-            System.out.println("-------------------------------------------------");
+            String format = "| %-5s | %-20s | %-15s | %-10s | %-15s |\n";
+            String line = "+-------+----------------------+-----------------+------------+-----------------+";
+            System.out.println(line);
+            System.out.printf(format, "ID", "Name", "Type", "Cost/Hr", "Available/Total");
+            System.out.println(line);
             for (Resource r : resources) {
-                System.out.printf("%d | %s | %s | %.2f | %d/%d\n",
-                        r.getId(), r.getName(), r.getType(), r.getCostPerHour(),
-                        r.getAvailableQuantity(), r.getQuantity());
+                System.out.printf(format,
+                        r.getId(),
+                        r.getName(),
+                        r.getType(),
+                        String.format("%.2f", r.getCostPerHour()),
+                        r.getAvailableQuantity() + "/" + r.getQuantity());
             }
-            System.out.println();
+    
+            
+            System.out.println(line);
         }
     } 
 
@@ -381,14 +387,22 @@ public class MenuController {
         if (resources.isEmpty()) {
             System.out.println("No resources available.");
         } else {
-            System.out.println("ID | Name | Type | Cost/Hour | Available/Total");
-            System.out.println("------------------------------------------------");
+            String format = "| %-5s | %-20s | %-15s | %-10s | %-15s |\n";
+            String line = "+-------+----------------------+-----------------+------------+-----------------+";
+            System.out.println(line);
+            System.out.printf(format, "ID", "Name", "Type", "Cost/Hr", "Available/Total");
+            System.out.println(line);
             for (Resource r : resources) {
-                System.out.printf("%d | %s | %s | %.2f | %d/%d\n",
-                        r.getId(), r.getName(), r.getType(), r.getCostPerHour(),
-                        r.getAvailableQuantity(), r.getQuantity());
+                System.out.printf(format,
+                        r.getId(),
+                        r.getName(),
+                        r.getType(),
+                        String.format("%.2f", r.getCostPerHour()),
+                        r.getAvailableQuantity() + "/" + r.getQuantity());
             }
-            System.out.println();
+    
+            
+            System.out.println(line);
         }
     }
 }
